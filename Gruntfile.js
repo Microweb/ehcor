@@ -4,9 +4,9 @@ module.exports = function(grunt) {
     'use strict';
 
     grunt.initConfig({
-        pkg:grunt.file.readJSON('package.json'),
-        config:{
-            files:[
+        pkg: grunt.file.readJSON('package.json'),
+        config: {
+            files: [
                 'js/ehcor/core/main.js',
                 'js/ehcor/core/dom.js',
                 'js/ehcor/core/events.js',
@@ -19,37 +19,45 @@ module.exports = function(grunt) {
             ]
         },
         meta: {
-            banner:'/*! sjs v<%= pkg.version %> sjs */'
+            banner: '/*! sjs v<%= pkg.version %> sjs */'
         },
-        jsbeautifier:{
-            files:["<%=config.files %>"]
+        jsbeautifier: {
+            files: ["<%=config.files %>", 'Gruntfile.js']
         },
         watch: {
-            files:["<%=config.files %>"],
-            tasks:['jshint']
+            files: ["<%=config.files %>"],
+            tasks: ['jshint']
         },
-
+        connect: {
+            server: {
+                options: {
+                    port: 8000,
+                    host: '*',
+                    keepalive: true
+                }
+            }
+        },
         jshint: {
-            files:["<%=config.files %>"],
+            files: ["<%=config.files %>"],
             options: {
-                curly:true,
-                eqeqeq:true,
-                immed:true,
-                latedef:true,
-                newcap:false,
-                noarg:true,
-                sub:true,
-                undef:true,
-                boss:true,
-                eqnull:true,
-                wsh:true,
-                browser:true,
+                curly: true,
+                eqeqeq: true,
+                immed: true,
+                latedef: true,
+                newcap: false,
+                noarg: true,
+                sub: true,
+                undef: true,
+                boss: true,
+                eqnull: true,
+                wsh: true,
+                browser: true,
                 es5: true,
                 globals: {
-                    global:true,
-                    self:true,
-                    ehcor:true,
-                    console:true
+                    global: true,
+                    self: true,
+                    ehcor: true,
+                    console: true
                 }
             }
         }
@@ -58,11 +66,10 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-contrib-watch');
-    grunt.loadNpmTasks('grunt-contrib-concat');
-    grunt.loadNpmTasks('grunt-contrib-clean');
+    grunt.loadNpmTasks('grunt-contrib-connect');
     grunt.loadNpmTasks('grunt-jsbeautifier');
-        
-    grunt.registerTask('default', ['jsbeautifier', 'jshint']);
+
+    grunt.registerTask('dev', ['jsbeautifier', 'jshint']);
+    grunt.registerTask('default', ['dev', 'connect']);
 
 };
-
