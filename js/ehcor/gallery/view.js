@@ -21,6 +21,8 @@
         ehcor.Events.call(this);
         this.$dom = $dom;
         this.$number = $dom.querySelector('h1 span');
+        this.$title = document.querySelector('title');
+        this.title = this.$title.innerHTML;
 
         this._ = {
             item: dom.query('#ehcor-view-item').innerHTML
@@ -138,8 +140,9 @@
          * @param {number} num
          */
         update: function(num) {
-            console.log(num);
-            this.$number.innerHTML = num > 0 ? '(' + num + ')' : '';
+            var label = num > 0 ? ' (' + num + ')' : '';
+            this.$number.innerHTML = label;
+            this.$title.innerHTML = this.title + label;
         },
 
         /**

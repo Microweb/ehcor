@@ -1,5 +1,6 @@
 (function(root) {
     'use strict';
+
     /**
      * @namespace ehcor.gallery.model
      */
