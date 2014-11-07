@@ -89,8 +89,8 @@
     Files.prototype.add = function(file) {
         console.debug('ehcor.model.Files::add(File(' + file.id + '))');
         var self = this;
-        if(!this._files.hasOwnProperty(file.id)){
-            this._size+=1;
+        if (!this._files.hasOwnProperty(file.id)) {
+            this._size += 1;
         }
         this._files[file.id] = file;
         this._storage.addFile(file, function(err) {
@@ -132,7 +132,7 @@
         var files = this._storage.loadFiles(function(err, files) {
             for (var i = 0, j = files.length; i < j; i++) {
                 var file = files[i];
-                self._size+=1;
+                self._size += 1;
                 self._files[file.id] = file;
                 self.trigger('load', file);
             }

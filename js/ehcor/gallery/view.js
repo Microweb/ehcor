@@ -94,9 +94,9 @@
             image.src = file.data;
 
         },
-        update:function(num){
+        update: function(num) {
             console.log(num);
-            this.$number.innerHTML = num >0  ? '('+num+')' : '';
+            this.$number.innerHTML = num > 0 ? '(' + num + ')' : '';
         }
     });
     root.view = function($dom) {
