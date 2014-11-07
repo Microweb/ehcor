@@ -1,5 +1,9 @@
 (function(root) {
     'use strict';
+    /**
+     * @namespace ehcor.gallery.model
+     */
+    root.model = {};
 
     var sid = (function() {
         var time = new Date().getTime();
@@ -10,7 +14,10 @@
     })();
 
     /**
-     * Constructor
+     * File
+     *
+     * @class
+     * @memberof ehcor.gallery.model
      *
      * @param {string} id
      * @param {string} name
@@ -30,8 +37,11 @@
         this.width = 0;
         this.height = 0;
     }
-    File.prototype = {
+    File.prototype = /** @lends ehcor.gallery.model.File.prototype */ {
+
         /**
+         * Serialize file object
+         *
          * @return {Object}
          */
         serialize: function() {
@@ -43,22 +53,18 @@
                 type: this.type,
                 data: this.data
             };
-        },
-        printSize: function(bytes) {
-            var sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
-            if (bytes === 0) {
-                return 'n/a';
-            }
-            var i = parseInt(Math.floor(Math.log(bytes) / Math.log(1024)), 10);
-            return Math.round(bytes / Math.pow(1024, i), 2) + ' ' + sizes[i];
         }
     };
 
 
     /**
-     * Constructor
+     * Files
      *
-     * @param {object} storage
+     * @class
+     * @memberof ehcor.gallery.model
+     * @name Files
+     * @extend ehcor.Events
+     * @param {ehcor.gallery.storage.FileLocalStorage} storage
      */
     function Files(fileStorage) {
         ehcor.Events.call(this);
@@ -67,22 +73,34 @@
         this._storage = fileStorage;
         this._size = 0;
     }
+
+    /** @ignore */
     Files.prototype = Object.create(ehcor.Events.prototype);
+
     /**
      * Find file by id
      *
+     * @memberof ehcor.gallery.model.Files.prototype
      * @param {string} id
      */
     Files.prototype.find = function(id) {
         return this._files[id];
     };
 
+    /**
+     * Return number of files
+     *
+     * @memberof ehcor.gallery.model.Files.prototype
+     * @return {number}
+     */
     Files.prototype.size = function() {
         return this._size;
     };
 
     /**
+     * Add file
      *
+     * @memberof ehcor.gallery.model.Files.prototype
      * @param {object} file
      * @param {boolean} notsave
      */
@@ -102,7 +120,9 @@
         });
     };
     /**
+     * Remove file
      *
+     * @memberof ehcor.gallery.model.Files.prototype
      * @param {string} id
      */
     Files.prototype.remove = function(id) {
@@ -125,6 +145,8 @@
     };
     /**
      * Load file from storage
+     *
+     * @memberof ehcor.gallery.model.Files.prototype
      */
     Files.prototype.load = function() {
         console.debug('ehcor.model.Files::load()');
@@ -140,8 +162,6 @@
 
     };
 
-    root.model = {
-        File: File,
-        Files: Files
-    };
+    root.model.File = File;
+    root.model.Files = Files;
 })(ehcor.gallery);

@@ -1,7 +1,21 @@
 (function(root) {
     'use strict';
+
+    /**
+     * @namespace ehcor.gallery.view
+     */
+    root.view = {};
+
     var dom = ehcor.dom;
 
+    /**
+     * UI
+     *
+     * @class
+     * @memberof ehcor.gallery.view
+     * @extend ehcor.Events
+     * @param {HTMLElement} $dom
+     */
     function UI($dom) {
         console.debug('ehcor.View::init(' + $dom + ')');
         ehcor.Events.call(this);
@@ -28,12 +42,17 @@
             }
         }, this);
     }
+
+    /** @ignore */
     UI.prototype = Object.create(ehcor.Events.prototype);
 
-    ehcor.ext(UI.prototype, {
-        _id: function(id) {
-            return 'ehcor-view-item-' + id;
-        },
+    ehcor.ext(UI.prototype, /** @lends ehcor.gallery.view.UI.prototype */ {
+
+        /**
+         * Set selected image as "to-remove"
+         *
+         * @param {string} id
+         */
         toRemove: function(id) {
             var uid = this._id(id);
             var $el = dom.query('#' + uid);
@@ -41,6 +60,12 @@
                 $el.classList.add('to-remove');
             }
         },
+
+        /**
+         * Set selected image as "saved"
+         *
+         * @param {string} id
+         */
         savedFile: function(id) {
             var uid = this._id(id);
             var $el = dom.query('#' + uid);
@@ -48,6 +73,12 @@
                 $el.classList.add('saved');
             }
         },
+
+        /**
+         * Set selected image
+         *
+         * @param {string} id
+         */
         removeFile: function(id) {
             var uid = this._id(id);
             var $el = dom.query('#' + uid);
@@ -55,6 +86,12 @@
                 $el.parentNode.removeChild($el);
             }
         },
+
+        /**
+         * Add and display image
+         *
+         * @param {ehcor.gallery.model.File} file
+         */
         addFile: function(file) {
             var data = file.serialize();
             data.uid = this._id(file.id);
@@ -94,12 +131,35 @@
             image.src = file.data;
 
         },
+
+        /**
+         * Update gallery counter
+         *
+         * @param {number} num
+         */
         update: function(num) {
             console.log(num);
             this.$number.innerHTML = num > 0 ? '(' + num + ')' : '';
-        }
+        },
+
+        /**
+         * Generate dom id
+
+         * @param {string} id
+         * @return {string}
+         */
+        _id: function(id) {
+            return 'ehcor-view-item-' + id;
+        },
     });
-    root.view = function($dom) {
+
+    /**
+     * Create UI
+     *
+     * @memberof ehcor.gallery.view
+     * @param {HTMLElement} $dom
+     */
+    root.view.factory = function($dom) {
         return new UI($dom);
     };
 })(ehcor.gallery);

@@ -1,6 +1,12 @@
 (function(root) {
     var dom = root.dom;
 
+    /**
+     * @class
+     * @name Upload
+     * @memberof ehcor
+     * @extends ehcor.Events
+     */
     function Upload($dom) {
         root.Events.call(this);
         dom.on($dom, 'dragover', function(e) {
@@ -22,6 +28,7 @@
     Upload.prototype = Object.create(root.Events.prototype);
 
     root.ext(Upload.prototype, {
+
         _upload: function() {
             this._prepare(this.$input.files);
         },

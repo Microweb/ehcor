@@ -1,7 +1,18 @@
 (function(root) {
     'use strict';
 
+    /**
+     * Dom helpers
+     *
+     * @namespace ehcor.dom
+     */
 
+    /**
+     * Check is events dom are suported
+     *
+     * @param {string} name Event name
+     * @return {boolean}
+     */
     var isEventSupport = (function() {
         var el = document.createElement('div');
         var cacheSupport = {};
@@ -28,8 +39,21 @@
         };
     })();
 
-    var $nativeTypes = ['unload', 'beforeunload', 'resize', 'DOMContentLoaded', 'hashchange', 'popstate', 'error', 'abort', 'scroll', 'message'];
+    //list of not extended events
+    var $nativeTypes = [
+        'unload',
+        'beforeunload',
+        'resize',
+        'DOMContentLoaded',
+        'hashchange',
+        'popstate',
+        'error',
+        'abort',
+        'scroll',
+        'message'
+    ];
 
+    //more readable for human
     var CODES = {
         38: 'up',
         39: 'right',
@@ -51,6 +75,13 @@
         8: 'backspace'
     };
 
+    /**
+     * Create custom dom event
+     *
+     * @param {DomEvent} e
+     * @param {string} ctype
+     * @return {object} Custom event
+     */
     var customEvent = function(e, ctype) {
 
         var target = e.target;
@@ -101,6 +132,8 @@
         }
         api.preventDefault = e.preventDefault.bind(e);
         api.stopPropagation = e.stopPropagation.bind(e);
+
+        //more simple 
         api.stop = function() {
             e.preventDefault();
             e.stopPropagation();
@@ -108,6 +141,12 @@
         return api;
     };
 
+    /**
+     * Get correct name for events
+     *
+     * @param {string} type
+     * @return {string}
+     */
     var getType = function(type) {
         if (type === 'mousewheel') {
             if (!isEventSupport('mousewheel')) {
@@ -117,10 +156,12 @@
         return type;
     };
 
+
     root.dom = {
         /**
          * Get HtmlElement position
          *
+         * @method ehcor.dom.position
          * @return {Position}
          */
         position: function($el) {
@@ -132,9 +173,11 @@
                 height: rect.bottom - rect.top
             };
         },
+
         /**
          * Simple dom selector
          *
+         * @method ehcor.dom.query
          * @param {string} selector
          * @param {HTMLElement} context
          * @retrun {HTMLElement}
@@ -147,8 +190,11 @@
             }
             return null;
         },
+
         /**
+         * Simple dom selector all
          *
+         * @method ehcor.dom.queryAll
          * @param {string} selector
          * @param {HTMLElement} context
          * @retrun {array} List of HTMLElement
@@ -161,6 +207,16 @@
             }
             return [];
         },
+
+        /**
+         * Add event to HTMLElement
+         *
+         * @method ehcor.dom.on
+         * @param {HTMLElement} target
+         * @param {string} type Event type
+         * @param {function} callback
+         * @param {object} bind New context
+         */
         on: function(target, type, callback, bind) {
             bind = bind || null;
             var handler = $nativeTypes.indexOf(type) !== -1 ? callback.bind(bind) : function(e) {

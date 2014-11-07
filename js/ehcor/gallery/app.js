@@ -2,8 +2,15 @@
     'use strict';
 
     /**
+     * @namespace ehcor.gallery
+     */
+
+    /**
      * Constructor
      *
+     * @class
+     * @memberof ehcor.gallery
+     * @extends ehcor.Events
      * @param {Storage} storage
      */
     function App(view, storage) {
@@ -20,13 +27,16 @@
         view.on('remove', this.onRemoveFile, this);
         view.on('show', this.onShowFile, this);
     }
+
+    /** @ignore */
     App.prototype = Object.create(ehcor.Events.prototype);
 
-    /**
-     *
-     * @param {array} files
-     */
-    root.ext(App.prototype, {
+    root.ext(App.prototype, /** @lends ehcor.gallery.App.prototype */ {
+        /** 
+         * Save uploaded files
+         *
+         * @param {array} files
+         */
         upload: function(files) {
             console.debug('ehcor.App::upload(files(' + files.length + '))');
             for (var i = 0, j = files.length; i < j; i++) {
@@ -37,20 +47,36 @@
                 this.view.update(this.files.size());
             }
         },
+        /** 
+         * Load file
+         *
+         * @param {ehcor.gallery.model.File} file
+         */
         loadFile: function(file) {
             this.view.addFile(file);
             this.view.savedFile(file.id);
             this.view.update(this.files.size());
         },
+        /** 
+         * Add file
+         *
+         * @param {ehcor.gallery.model.File} file
+         */
         addFile: function(file) {
             this.view.savedFile(file.id);
             this.view.update(this.files.size());
         },
+        /** 
+         * Remove file
+         *
+         * @param {ehcor.gallery.model.File} file
+         */
         removeFile: function(file) {
             this.view.removeFile(file.id);
             this.view.update(this.files.size());
         },
         /**
+         * Callback for view
          *
          * @param {string} id
          */
@@ -60,6 +86,7 @@
             this.files.remove(id);
         },
         /**
+         * Callback for view
          *
          * @param {string} id
          */
@@ -78,6 +105,9 @@
                 doc.close();
             }
         },
+        /**
+         * Run application
+         */
         run: function() {
             console.debug('ehcor.App::run()');
             var self = this;
@@ -86,6 +116,7 @@
             });
         }
     });
+
     root.gallery = {
         App: App
     };

@@ -37,7 +37,10 @@
 
             $ehcor = ehcor.dom.query('#ehcor');
             var upload = new ehcor.Upload(ehcor.dom.query('#upload'));
-            var gallery = new ehcor.gallery.App(ehcor.gallery.view($ehcor), ehcor.gallery.storage());
+            var gallery = new ehcor.gallery.App(
+                ehcor.gallery.view.factory($ehcor), 
+                ehcor.gallery.storage.factory()
+            );
             
             
             upload.on('files', gallery.upload, gallery);

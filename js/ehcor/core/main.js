@@ -12,8 +12,10 @@
     }
 
     /**
-     * Create our namspace
+     * Create our namaspace
+     *
      * @namespace ehcor
+     * @main ehcor
      */
     var ehcor = root.ehcor = {};
 
@@ -21,8 +23,10 @@
      * Extends object
      *
      * @method ehcor.ext
+     * @param {object} target
+     * @param {...object} others
      */
-    ehcor.ext = function(target) {
+    ehcor.ext = function(target, others) {
         if (arguments.length < 2) {
             throw new Error('Expected more than 2 arguments. (sjs.extend()');
         }
@@ -38,11 +42,13 @@
         }
         return target;
     };
+
     /**
-     * Helper for array likes object
+     * Tranform array likes object to array
      *
      * @method ehcor.toArray
      * @param {array} arr
+     * @return {array}
      */
     ehcor.toArray = function(arr) {
         try {
@@ -54,7 +60,7 @@
             }
             return _;
         }
-        return null;
+        return [];
     };
 
     /**

@@ -2,17 +2,22 @@
     'use strict';
 
     /**
-     * Events dispacher
+     * Events
+     *
+     * @class
+     * @memberof ehcor
      */
-    root.Events = function() {
+    function Events() {
         this.$listeners = {};
-    };
-    root.Events.prototype = {
+    }
+    Events.prototype = /** @lends ehcor.Events.prototype */ {
+
         /**
          * Add listener
          *
+         * @memberof ehcor.Events.prototype
          * @param {function} callback
-         * @param {object} bind
+         * @param {object} bind New context
          */
         on: function(name, callback, bind) {
             if (!this.$listeners.hasOwnProperty(name)) {
@@ -20,11 +25,13 @@
             }
             this.$listeners[name].push([callback, bind || null]);
         },
+
         /**
          * Fire event
-
+         *
+         * @memberof ehcor.Events.prototype
          * @param {string} name
-         * @param {mix} data
+         * @param {*} data
          */
         trigger: function(name, data) {
             var listeners = this.$listeners[name] || [],
@@ -39,5 +46,6 @@
             }
         }
     };
+    ehcor.Events = Events;
 
 })(ehcor);
