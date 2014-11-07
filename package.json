@@ -1,0 +1,33 @@
+{
+    "name": "ip",
+    "title": "Image Proccessing",
+    "description": "Some task todo",
+    "version": "1.0.0",
+    "homepage": "http://github.com/Microweb/ip",
+    "author":{
+        "name": "Smialy",
+        "url": "http://github.com/smialy"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/Microweb/ip.git"
+    },
+    "licenses": [
+        {
+            "type": "MIT"
+        }
+    ],
+    "dependencies": {
+    },
+    "devDependencies":{
+        "grunt": "~0.4.0",
+        "grunt-contrib-uglify":"~0.1.2",
+        "grunt-contrib-concat":"~0.1.2",
+        "grunt-contrib-jshint":"~0.1.1",
+        "grunt-contrib-watch":"~0.2.0",
+        "grunt-contrib-clean":"~0.6.0",
+        "grunt-jsbeautifier":"~0.2.6",
+        "grunt-contrib-connect": "~0.1.2"
+    },
+    "keywords": []
+}

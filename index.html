@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+
+        <title>Images Process</title>
+        <link rel="stylesheet" href="css/reset.css" />
+        <link rel="stylesheet" href="css/main.css" />
+    </head>
+    <body>
+        <div id="ehcor">
+            <h1>Images Process<span></span></h1>
+            <div id="upload" class="box-item">
+                <span>Upload</span>
+                <input type="file" multiple="" />
+            </div>
+        </div>
+
+        <script type="javascript/tpl" id="ehcor-view-item">
+            <div class="box-item box-img" data-cmd="#/show/{id}" id="{uid}">
+                <a class="remove" href="#" data-cmd="#/remove/{id}">remove</a>
+            </div>
+        </script>
+
+        <script type="text/javascript" src="js/ehcor/core/main.js"></script>
+        <script type="text/javascript" src="js/ehcor/core/dom.js"></script>
+        <script type="text/javascript" src="js/ehcor/core/events.js"></script>
+        <script type="text/javascript" src="js/ehcor/core/storage.js"></script>
+        <script type="text/javascript" src="js/ehcor/core/upload.js"></script>
+        <script type="text/javascript" src="js/ehcor/gallery/app.js"></script>
+        <script type="text/javascript" src="js/ehcor/gallery/model.js"></script>
+        <script type="text/javascript" src="js/ehcor/gallery/storage.js"></script>
+        <script type="text/javascript" src="js/ehcor/gallery/view.js"></script>
+
+        <script type="text/javascript" >
+        (function(){
+
+            $ehcor = ehcor.dom.query('#ehcor');
+            var upload = new ehcor.Upload(ehcor.dom.query('#upload'));
+            var gallery = new ehcor.gallery.App(ehcor.gallery.view($ehcor), ehcor.gallery.storage());
+            
+            
+            upload.on('files', gallery.upload, gallery);
+            
+            gallery.run();
+        })();
+        </script>
+    </body>
+</html>

@@ -1,0 +1,94 @@
+body {
+ background: #eee;
+ -webkit-font-smoothing: antialiased;
+ -moz-font-smoothing: antialiased;
+ -ms-font-smoothing: antialiased;
+ -o-font-smoothing: antialiased;
+ font-smoothing: antialiased;
+}
+body, input, button {
+ font: 14px Helvetica, Arial, sans-serif;
+ line-height: 1.4em;
+ color: #444;
+}
+a{
+ color: #777;
+}
+h1 {
+ font-size: 4em;
+ line-height: 1em;
+ text-align: center;
+}
+input {
+ border: none;
+ padding: 4px 8px;
+ width: 300px;
+ float: left;
+}
+button {
+ background:#bbb;
+ border:none;
+ float:left;
+ line-height: 24px;
+ width: 56px;
+}
+#ehcor .box-item{
+ position:relative;
+ float:left;
+ width:150px;
+ height:150px;
+ border:solid 1px #aaa;
+ padding:3px;
+ margin:8px;
+ background: #ddd;
+ cursor:pointer;
+}
+#ehcor .box-img{
+    background: #FF5858 url(../img/loader.gif) no-repeat center;
+}
+#ehcor .box-img.saved{
+ background-color:#ddd;
+}
+#ehcor .box-img.to-remove{
+ opacity:0.5;   
+}
+#ehcor .box-item:hover{
+ border-color:#444;
+}
+#ehcor .box-item .remove{
+ position:absolute;
+ top:3px;
+ right:3px;
+ padding:5px 8px;
+ background:#000;
+ color:#fff;
+ text-decoration:none;
+ opacity:0;
+}
+#ehcor .box-item:hover .remove{
+ background:rgba(0,0,0,0.6);
+ opacity:1;
+}
+
+#upload{
+ line-height:150px;
+ text-align:center;
+ font-size:40px;
+ cursor:pointer;
+ overflow:hidden;
+}
+#upload.over{
+ border-color:#444;
+}
+#upload input{
+ position:absolute;
+ top:50%;
+ left:0;
+ transform:scale(10,10);
+ cursor:pointer;
+ opacity:0;
+ 
+}
+#ehcor .box-item canvas{
+ display:block;
+}
