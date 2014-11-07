@@ -40,7 +40,7 @@
             root.toArray(files).forEach(function(file) {
                 imageType = /image.*/;
                 //is image
-                if (/image\/.*/.test(file.type)) {
+                if (/image\/(jpg|jpeg|png)/.test(file.type)) {
                     //load body
                     reader = new FileReader();
                     reader.onload = function(e) {
