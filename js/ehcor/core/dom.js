@@ -90,7 +90,7 @@
         }
 
         var api = {
-            e: e,
+            orginal: e,
             type: ctype || e.type,
             shift: e.shiftKey,
             control: e.ctrlKey,

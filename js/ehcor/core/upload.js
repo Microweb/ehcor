@@ -14,7 +14,7 @@
         });
         dom.on($dom, 'drop', function(e) {
             e.stop();
-            this._prepare(e.dataTransfer.files);
+            this._prepare(e.orginal.dataTransfer.files);
         }, this);
         dom.on($dom, 'dragenter', function(e) {
             $dom.classList.add('over');
